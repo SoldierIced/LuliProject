@@ -1,0 +1,32 @@
+App organizadora.
+- Turnos de 45min/90min con 30min de descanso de lunes a viernes y con opción de poder reservar sábado por medio o 2 sábados al mes.
+Que antes de anotarse me de la opción de autorizar el turno.
+Horarios:
+8am - 19hs.
+
+php artisan make:model Horario --migration   //crea el modelo y la migracion
+
+
+
+php artisan migrate:refresh resetea las tablas y las crea devuelta
+
+ dd() es un console log que termina la ejecucion
+
+ var_dump tira informacion sobre la variable
+
+Verificar que el model no este vacio completar los campos filiables con la tablas
+try: es para verificar que un fragmento de codigo funcione, si no guarda el error en el catch y depues ponemos en dd para mostrarlo
+
+Verificar que se retorne la funcion
+
+$re: devuelve la informacion del request
+# $re->all: devuelve los valores de la visual
+
+where sirve para traernos valor filtrado por un campo especifico
+
+{{}} dentro de las 2 llaves se encuentrar codigo laravel o php
+
+verificar en la ruta si el nombre del controlador sea el que estemos usando, en caso de que no sea el mismo usar las herramientas de las extenciones para que te agregue el controlador al global automaticante, borrando y volviendo a escribir el nombre del controlador( si no tenes las extenciones, hay que agregarlo manualmente al global arriba de todo)
+
+migraciones->modelos->controladores->rutas->vistas (o viceversa)
+
