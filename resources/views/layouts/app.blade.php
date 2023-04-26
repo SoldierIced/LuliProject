@@ -49,7 +49,7 @@
                 turno</a>
 
             @if (Auth::user() != null && Auth::user()->paid != null)
-                <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('tablaestado') }}"
+                <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('admin-turnos') }}"
                     role="button">admin</a>
             @endif
             <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('mostrarturno') }}" role="button">mis
@@ -71,6 +71,34 @@
             </div>
         </section>
         <div class="album py-5 bg-light">
+
+
+            @if (Session::has('err'))
+                <div class="col-12 alert alert-danger text-center alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>
+                        {{ Session::pull('err') }}
+                    </strong>
+
+                </div>
+            @endif
+            @if (Session::has('msj'))
+                <div class="col-12 alert alert-success text-center alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>
+                        {{ Session::pull('msj') }}
+                    </strong>
+                </div>
+            @endif
+
+
+            <script>
+                $(".alert").alert();
+            </script>
             <div class="container">
                 @yield('content')
 
@@ -79,14 +107,7 @@
 
     </main>
 
-    <script>
-        @if (Session::has('err'))
-            alert(" {{ Session::pull('err') }}")
-        @endif
-        @if (Session::has('msj'))
-            alert(" {{ Session::pull('msj') }}")
-        @endif
-    </script>
+    <script></script>
     @yield('js')
 </body>
 

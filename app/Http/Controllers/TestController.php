@@ -16,6 +16,7 @@ class TestController extends Controller
             "something" => "show me the money",
             "algo" => "tete"
         ];
+        // dd($request->all());
 
         // dd(Auth::user(),User::find(1));
         // dd($data);
@@ -46,12 +47,12 @@ class TestController extends Controller
                 "horario" => $re->Horariocompleto,
                 "dia" => $re->Fechaturno,
                 "user_id" => $id,
-                // "comentario"=>"",
+                "comentario"=>"",
                 "estado" => "inicial"
             ]);
             Session::put("msj", "Se ha guardado correctamente su turno");
         } catch (\Throwable $th) {
-            // dd($th);
+             dd($th);
             Session::put("msj", "Se ha rompido todo arre xd");
         }
 

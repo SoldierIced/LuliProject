@@ -16,7 +16,7 @@ class Turno extends Model
         'estado',
         'comentario',
     ];
-
+    public $timestamps = false;
 
     /**
      * Get the user associated with the Turno
@@ -26,5 +26,10 @@ class Turno extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+
+    static public function testing(){
+        dd(12333);
     }
 }

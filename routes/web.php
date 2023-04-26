@@ -42,4 +42,6 @@ Route::post('/save-turno', [TestController::class, 'saveturno'])->name ('guardar
 Route::get('/mostrarturno', [TestController::class, 'mostrarturno'])->name('mostrarturno');
 
 //ruta pal admin
-Route::get('/admin/turnos', [TurnoController::class, 'tablaestado'])->name('tablaestado');
+Route::get('/admin/turnos', [TurnoController::class, 'tablaestado'])->name('admin-turnos');
+
+Route::post('/admin/turnos/guardar', [TurnoController::class, 'guardarestado'])->name('admin-turnos-guardar');

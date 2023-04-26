@@ -20,7 +20,7 @@ try: es para verificar que un fragmento de codigo funcione, si no guarda el erro
 Verificar que se retorne la funcion
 
 $re: devuelve la informacion del request
-# $re->all: devuelve los valores de la visual
+# $re->all(): devuelve los valores de la visual
 
 where sirve para traernos valor filtrado por un campo especifico
 
@@ -30,3 +30,6 @@ verificar en la ruta si el nombre del controlador sea el que estemos usando, en 
 
 migraciones->modelos->controladores->rutas->vistas (o viceversa)
 
+//TODO sirve para comentar todo lo que me falta hacer
+
+si no usamos los timestamps hay que decirle al modelo que no los esta usando asi : public $timestamps = false;
