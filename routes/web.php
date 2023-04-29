@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\TurnoController as AdminTurnoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TurnoController;
+// use App\Http\Controllers\Admin\TurnoController as AdminTurnoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,4 +45,7 @@ Route::post('/save-turno', [TestController::class, 'saveturno'])->name ('guardar
 Route::get('/mostrarturno', [TestController::class, 'mostrarturno'])->name('mostrarturno');
 
 //ruta pal admin
-Route::get('/admin/turnos', [TurnoController::class, 'tablaestado'])->name('tablaestado');
+Route::get('/admin/turnos', [AdminTurnoController::class, 'adminVista'])->name('adminVista');
+
+
+Route::post('/admin/turnos/guardar', [AdminTurnoController::class, 'guardar'])->name('admin-guardar-turno');

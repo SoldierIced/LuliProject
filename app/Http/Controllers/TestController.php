@@ -46,12 +46,12 @@ class TestController extends Controller
                 "horario" => $re->Horariocompleto,
                 "dia" => $re->Fechaturno,
                 "user_id" => $id,
-                // "comentario"=>"",
+                "comentario"=>"",
                 "estado" => "inicial"
             ]);
             Session::put("msj", "Se ha guardado correctamente su turno");
         } catch (\Throwable $th) {
-            // dd($th);
+             dd($th);
             Session::put("msj", "Se ha rompido todo arre xd");
         }
 

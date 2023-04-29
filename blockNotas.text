@@ -10,8 +10,8 @@ php artisan make:model Horario --migration   //crea el modelo y la migracion
 
 php artisan migrate:refresh resetea las tablas y las crea devuelta
 
- dd() es un console log que termina la ejecucion
-
+ dd($ALGOAMOSTRAR); es un console log que termina la ejecucion
+{{dd($ALGOAMOSTRAR)}}
  var_dump tira informacion sobre la variable
 
 Verificar que el model no este vacio completar los campos filiables con la tablas
@@ -20,9 +20,10 @@ try: es para verificar que un fragmento de codigo funcione, si no guarda el erro
 Verificar que se retorne la funcion
 
 $re: devuelve la informacion del request
-# $re->all: devuelve los valores de la visual
+# $re->all(): devuelve los valores de la visual
 
-where sirve para traernos valor filtrado por un campo especifico
+where sirve para traernos valor filtrado por un campo especifico de los modelos
+ej : Turno::where("columna nombre que usemos", "valor a filtrar")->get();
 
 {{}} dentro de las 2 llaves se encuentrar codigo laravel o php
 

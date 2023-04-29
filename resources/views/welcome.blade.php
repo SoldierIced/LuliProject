@@ -33,7 +33,7 @@
 
             @if (Auth::user()!=null && Auth::user()->paid != null)
                 <a  class="p-2 text-dark btn btn-outline-primary"
-                    href="{{ route('tablaestado') }}" role="button">admin</a>
+                    href="{{ route('adminVista') }}" role="button">admin</a>
             @endif
             <a  class="p-2 text-dark btn btn-outline-primary" href="{{ route('mostrarturno') }}" role="button">mis turnos</a>
         </nav>

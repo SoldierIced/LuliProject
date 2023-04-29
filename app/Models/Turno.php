@@ -16,6 +16,7 @@ class Turno extends Model
         'estado',
         'comentario',
     ];
+    public $timestamps = false;
 
 
     /**
