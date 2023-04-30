@@ -20,13 +20,18 @@ class ServicioController extends Controller
     public function guardar(Request $re)
     {
         try {
-
             $servicio = new Servicio();
             $servicio->titulo = $re->titulo;
             $servicio->descripcion = $re->descripcion;
             $servicio->costo = $re->costo;
             $servicio->duracion = $re->duracion;
             $servicio->tipo = $re->tipo;
+
+            if( strlen($re->titulo) > 50 || strlen($re->descripcion) > 200 || $re->costo <0 || $re->costo >999999 || $re->duracion <0 || $re->duracion > 1440 || strlen($re->tipo) > 50 ){
+
+                Session::put("err", "Datos ingresados incorrectos.");
+                return redirect()->route("admin-servicios");
+            }
 
             // dd($servicio);
             $servicio->save();
@@ -53,23 +58,30 @@ class ServicioController extends Controller
 
     public function modificar(Request $re)
     {
-        try {
-            // dd($re->all());
-            $servicio = Servicio::find($re->servicio_id);
-            $servicio->titulo = $re->input('titulo');
-            $servicio->descripcion = $re->input('descripcion');
-            $servicio->costo = $re->input('costo');
-            $servicio->duracion = $re->input('duracion');
-            $servicio->tipo = $re->input('tipo');
+        // try {
 
-            $servicio->update();
+            $servicio = Servicio::find($re->id);
+            // dd($re->all());
+            $servicio->titulo = $re->titulo;
+            $servicio->descripcion = $re->descripcion;
+            $servicio->costo = $re->costo;
+            $servicio->duracion = $re->duracion;
+            $servicio->tipo = $re->tipo;
+
+            if( strlen($re->titulo) > 50 || strlen($re->descripcion) > 200 || $re->costo <0 || $re->costo >999999 || $re->duracion <0 || $re->duracion > 1440 || strlen($re->tipo) > 50 ){
+
+                Session::put("err", "Datos ingresados incorrectos.");
+                return redirect()->route("admin-servicios");
+            }
+
+            $servicio->save();
 
             // dd($servicio);
             Session::put("msj", "Se ha modificado correctamente su nuevo servicio");
-        } catch (\Throwable $th) {
-            //throw $th;
-            Session::put("err", "Se ha roto.");
-        }
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        //     Session::put("err", "Se ha roto.");
+        // }
         return redirect()->route("admin-servicios");
     }
 }

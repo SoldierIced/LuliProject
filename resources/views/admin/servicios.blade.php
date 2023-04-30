@@ -45,9 +45,10 @@
             </div>
 
         </form>
+
         <div class="col-12">
             <table class="table table-dark">
-                <thead class="thead-light">
+                <thead class="thead-dark">
                     <tr>
                         <th>#</th>
                         <th>Titulo</th>
@@ -85,25 +86,54 @@
                                     {{ $servicio->duracion }}
                                 </td>
                                 <td>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#{{ 'modaleliminar' . $servicio->id }}">Eliminar Servicio </button>
+
                                     <form action="{{ route('admin-servicios-eliminar') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-info">Eliminar Servicio</button>
                                         <input class="form-control " type="hidden" name="servicio_id"
                                             value="{{ $servicio->id }}">
-                                    </form>
 
-
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal1">
-                                        Modificar Servicio</button>
-
-                                    <form action="{{ route('admin-servicios-modificar') }}" method="POST">
-                                        @csrf
-                                        <div class="modal fade" id="modal1" tabindex="-1" role="dialog"
+                                        <div class="modal fade" id="{{ 'modaleliminar' . $servicio->id }}" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Modificar Servicio</h5>
+                                                        <h5 class="modal-title text-dark" id="exampleModalLongTitle">Servicio {{$servicio->titulo}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-dark">
+                                                        ¿Desea eliminar el servicio?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                    <button type="button" class="btn btn-info" data-toggle="modal"
+                                        data-target="#{{ 'modal' . $servicio->id }}">
+                                        Modificar Servicio</button>
+
+                                    <form action="{{ route('admin-servicios-modificar') }}" method="POST">
+                                        @csrf
+                                        <div class="modal fade" id="{{ 'modal' . $servicio->id }}" tabindex="-1"
+                                            role="dialog" aria-hidden="true">
+
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content text-dark">
+                                                    <div class="modal-header">
+                                                        <h2 class="modal-title " id="{{ 'modal' . $servicio->id }}Title">
+                                                            Modificar
+                                                            Servicio {{ $servicio->titulo }}</h2>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -111,26 +141,29 @@
                                                     </div>
                                                     <div class="modal-body">
 
+                                                        <input class="form-control" type="hidden" name="id"
+                                                            value={{ $servicio->id }}>
+
                                                         <p>Titulo: </p><input class="form-control" type="text"
-                                                            name="titulo" value={{$servicio->titulo}}>
+                                                            name="titulo" value="{{ $servicio->titulo }}">
 
                                                         <p>Descripcion: </p><input class="form-control" type="text"
-                                                            name="descripcion" value={{$servicio->descripcion}}>
+                                                            name="descripcion" value="{{ $servicio->descripcion }}">
 
                                                         <p>Costo: </p><input class="form-control" type="text"
-                                                            name="costo" value={{$servicio->costo}}>
+                                                            name="costo" value="{{ $servicio->costo }}">
 
                                                         <p>Tipo: </p><input class="form-control" type="text"
-                                                            name="tipo" value={{$servicio->tipo}}>
+                                                            name="tipo" value="{{ $servicio->tipo }}">
 
                                                         <p>Duracion: </p><input class="form-control" type="text"
-                                                            name="duracion" value={{$servicio->duracion}}>
+                                                            name="duracion" value="{{ $servicio->duracion }}">
 
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Cerrar</button>
-                                                        <button type="submit" class="btn btn-primary">Modificar</button>
+                                                        <button type="submit" class="btn btn-success">Modificar</button>
                                                     </div>
                                                 </div>
                                             </div>
