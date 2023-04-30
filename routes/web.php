@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,3 +46,8 @@ Route::get('/mostrarturno', [TestController::class, 'mostrarturno'])->name('most
 Route::get('/admin/turnos', [TurnoController::class, 'tablaestado'])->name('admin-turnos');
 
 Route::post('/admin/turnos/guardar', [TurnoController::class, 'guardarestado'])->name('admin-turnos-guardar');
+
+Route::get('/admin/servicios', [ServicioController::class, 'agregarnuevoservicio'])->name('admin-servicios');
+Route::post('/admin/servicios/guardar', [ServicioController::class, 'guardar'])->name('admin-servicios-guardar');
+Route::post('/admin/servicios/eliminar', [ServicioController::class, 'eliminar'])->name('admin-servicios-eliminar');
+Route::post('/admin/servicios/modificar', [ServicioController::class, 'modificar'])->name('admin-servicios-modificar');

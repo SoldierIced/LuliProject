@@ -23,7 +23,7 @@
 </head>
 
 <body class="">
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    {{-- <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto font-weight-normal">Pagina de laravel -</h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('test') }}" role="button">Home</a>
@@ -55,8 +55,8 @@
             <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('mostrarturno') }}" role="button">mis
                 turnos</a>
         </nav>
-    </div>
-    <main role="main">
+    </div> --}}
+    @include('layouts.navbar')
 
         <section class="jumbotron text-center">
             <div class="container">

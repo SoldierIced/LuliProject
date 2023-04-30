@@ -4,7 +4,7 @@ Que antes de anotarse me de la opción de autorizar el turno.
 Horarios:
 8am - 19hs.
 
-php artisan make:model Horario --migration   //crea el modelo y la migracion
+php artisan make:model "Nombre de la migracion" --mc   //crea el modelo, la migracion y el controlador
 
 
 
@@ -22,7 +22,9 @@ Verificar que se retorne la funcion
 $re: devuelve la informacion del request
 # $re->all(): devuelve los valores de la visual
 
-where sirve para traernos valor filtrado por un campo especifico
+where sirve para traernos valor filtrado por un campo especifico de los modelos ej : Turno::where("columna nombre que usemos", "valor a filtrar")->get();  los where son acumulables
+la forma orginal del where(calumna, condicion, valor)  , la condicion, osea =, < o > va entre ""
+el where es como un if pero en la base de datos
 
 {{}} dentro de las 2 llaves se encuentrar codigo laravel o php
 
@@ -30,6 +32,21 @@ verificar en la ruta si el nombre del controlador sea el que estemos usando, en 
 
 migraciones->modelos->controladores->rutas->vistas (o viceversa)
 
+alt + shift + F ordena el codigo para que quede lindo
+
 //TODO sirve para comentar todo lo que me falta hacer
 
 si no usamos los timestamps hay que decirle al modelo que no los esta usando asi : public $timestamps = false;
+
+Carbon::now(); me da la fecha actual
+
+string tiene un limite, longtext no o nose (en la migracion)
+
+
+TO DO
+que en horarios no se puedan ponere cosas negativas
+que solo se puedan poner horarios reales 0-24hs
+que las fecha a cargar en nuevo turno que sea a partir de la fecha de hoy en adelante(horas)
+que no haya ya un turno existente en ese horario
+que haya un break de 30 minutos entre turno y turno
+

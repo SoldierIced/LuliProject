@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Turno;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -39,20 +40,41 @@ class TestController extends Controller
     }
     public function saveturno(Request $re)
     {
+        $turnoocupado = Turno::where("dia", $re->Fechaturno)->where("horario", '<', $re->Horariocompleto + 2)->where("horario", '>', $re->Horariocompleto - 2)->first();
+
+
+        $horaactual = Carbon::now();
+        $fechaturno = Carbon::parse($re->Fechaturno);
+
+        //    dd($horaactual, $fechaturno);
         $id = Auth::user()->id;  //guarda el id de user en id
-        $user = User::find($id); //esta encontrando en el usuario en base al id
-        //dd($re->all(),$id);
+        // dd($re->all(),$id);
         try {
+            if ($re->Horariocompleto > 24 || $re->Horariocompleto < 0) {     //verifico que la hora sea en un formato valido
+                Session::put("err", "Horario invalido");
+                return redirect()->route("test");
+            }
+
+            if ($fechaturno < $horaactual) {       //verifico que la hora no sea anterior al horario actual
+                Session::put("err", "Fecha invalida");
+                return redirect()->route("test");
+            }
+// dd($turnoocupado);
+            if ($turnoocupado != null) {      //verifico que el horario no este en uso actualmente
+                Session::put("err", "Horario Ocupado");
+                return redirect()->route("test");
+            }
+
             Turno::create([
                 "horario" => $re->Horariocompleto,
                 "dia" => $re->Fechaturno,
                 "user_id" => $id,
-                "comentario"=>"",
+                "comentario" => "",
                 "estado" => "inicial"
             ]);
             Session::put("msj", "Se ha guardado correctamente su turno");
         } catch (\Throwable $th) {
-             dd($th);
+            dd($th);
             Session::put("msj", "Se ha rompido todo arre xd");
         }
 
