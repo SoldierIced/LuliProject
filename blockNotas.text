@@ -5,7 +5,9 @@ Horarios:
 8am - 19hs.
 
 php artisan make:model Horario --migration   //crea el modelo y la migracion
+Si ponemos php artizan make:model "Nombre elejido" -mc (de esta manera creamos el modelo y la migracion a la vez)
 
+php artisan migrate   (esta consigna se usa para correr las migraciones que faltan)
 
 
 php artisan migrate:refresh resetea las tablas y las crea devuelta

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\TurnoController as AdminTurnoController;
+use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::any('/logout', function () {
+
+    Auth::logout();
+    return redirect()->route("home");
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -49,3 +55,10 @@ Route::get('/admin/turnos', [AdminTurnoController::class, 'adminVista'])->name('
 
 
 Route::post('/admin/turnos/guardar', [AdminTurnoController::class, 'guardar'])->name('admin-guardar-turno');
+
+Route::get('/admin/servicios', [ServicioController::class, 'vistaservicios'])->name('admin-servicios');
+
+Route::post('/admin/servicios/guardar', [ServicioController::class, 'guardar'])->name('admin-guardar-servicio');
+
+Route::post('/admin/servicios/eliminar', [ServicioController::class, 'eliminar'])->name('admin-eliminar-servicio');
+
