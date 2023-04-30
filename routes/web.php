@@ -62,3 +62,4 @@ Route::post('/admin/servicios/guardar', [ServicioController::class, 'guardar'])-
 
 Route::post('/admin/servicios/eliminar', [ServicioController::class, 'eliminar'])->name('admin-eliminar-servicio');
 
+Route::post('/admin/servicios/modificar', [ServicioController::class, 'modificar'])->name('admin-modificar-servicio');

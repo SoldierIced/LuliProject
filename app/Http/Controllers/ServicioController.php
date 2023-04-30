@@ -46,5 +46,29 @@ class ServicioController extends Controller
 
         return redirect()->route("admin-servicios");
     }
-    
+
+    public function modificar(Request $re){
+
+        // dd($re->all());
+        $servicio = servicio::find($re->id);
+
+        if($re->titulo)
+        $servicio->titulo = $re->titulo;
+        if($re->descripcion)
+        $servicio->descripcion= $re->descripcion;
+        if($re->costo)
+        $servicio->costo= $re->costo;
+        if($re->duracion)
+        $servicio->duracion= $re->duracion;
+        if($re->tipo)
+        $servicio->tipo= $re->tipo;
+
+        $servicio->save();
+
+        Session::put("msj", "Se ha modificado correctamente su servicio");
+
+
+        return redirect()->route("admin-servicios");
+    }
+
 }
