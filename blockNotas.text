@@ -24,10 +24,17 @@ $re: devuelve la informacion del request
 
 where sirve para traernos valor filtrado por un campo especifico de los modelos
 ej : Turno::where("columna nombre que usemos", "valor a filtrar")->get();
-
+ los where son acumulables
 {{}} dentro de las 2 llaves se encuentrar codigo laravel o php
 
 verificar en la ruta si el nombre del controlador sea el que estemos usando, en caso de que no sea el mismo usar las herramientas de las extenciones para que te agregue el controlador al global automaticante, borrando y volviendo a escribir el nombre del controlador( si no tenes las extenciones, hay que agregarlo manualmente al global arriba de todo)
 
 migraciones->modelos->controladores->rutas->vistas (o viceversa)
+
+To do: validar que en horarios no se puedan poner horas negativas, --listo
+ que sea un horario reali, del 1 al 24. --listo
+  La fecha tiene que ser mayor a la actual --listo
+ tambien cunado vayan a cagar un turno que, no haya turno existente --listo
+
+otra validacion, que sea el tiempo total del turno con el descanso incluido
 

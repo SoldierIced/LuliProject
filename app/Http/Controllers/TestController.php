@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Turno;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -38,20 +39,49 @@ class TestController extends Controller
     }
     public function saveturno(Request $re)
     {
-        $id = Auth::user()->id;  //guarda el id de user en id
-        $user = User::find($id); //esta encontrando en el usuario en base al id
-        //dd($re->all(),$id);
+        // dd("mi variable : ",$re->all());
         try {
+
+
+            //validamos que el horario este dentro del rango pedido
+            if ($re->Horariocompleto < 1 || $re->Horariocompleto > 24) {
+                Session::put("msj", "El horario cargado es incorrecto.");
+                return redirect()->route("test");
+            }
+            //validamos que la fecha cargadad por el usuario sea mayor o igual a la actual
+            $fechaActual = Carbon::now();
+            $fechaTurno = Carbon::parse($re->Fechaturno);
+            // dd();
+            if ($fechaActual > $fechaTurno) {
+                Session::put("msj", "La fecha cargada es incorrecta.");
+                return redirect()->route("test");
+            }
+            //Validamos que no haya un turno existente
+            $turnoOcupado = Turno::where("horario", $re->Horariocompleto)->where("dia", $re->Fechaturno)->first();
+            // dd($turnoOcupado);
+            if ($turnoOcupado) {
+                Session::put("msj", "La fecha cargada esta en uso.");
+                return redirect()->route("test");
+            }
+            //Validamos que el horario no este ocupado dentro del rango del turno
+            $horarioOcupado = Turno::where("dia", $re->Fechaturno)->where("horario", ">", $re->Horariocompleto - 2)->where("horario", "<", $re->Horariocompleto+2)->first();
+            //dd($horarioOcupado);
+            if ($horarioOcupado) {
+                Session::put("msj", "El horario esta ocupado.");
+                return redirect()->route("test");
+            }
+            $id = Auth::user()->id;  //guarda el id de user en id
+
             Turno::create([
                 "horario" => $re->Horariocompleto,
                 "dia" => $re->Fechaturno,
                 "user_id" => $id,
-                "comentario"=>"",
+                "comentario" => "",
                 "estado" => "inicial"
             ]);
             Session::put("msj", "Se ha guardado correctamente su turno");
         } catch (\Throwable $th) {
-             dd($th);
+            dd($th);
             Session::put("msj", "Se ha rompido todo arre xd");
         }
 

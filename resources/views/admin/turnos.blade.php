@@ -46,8 +46,10 @@
                         <li class="list-group-item">
                             Estado:
                             <select class="form-control" name="estado">
-                                <option value="finalizado">Super Finalizado</option>
-                                <option value="cancelado">Cancelado</option>
+                                <option value="finalizado" @if ($turno->estado == 'finalizado') selected @endif>Super
+                                    Finalizado</option>
+                                <option value="cancelado" @if ($turno->estado == 'cancelado') selected @endif>Cancelado
+                                </option>
                             </select>
                         </li>
                     </ul>
