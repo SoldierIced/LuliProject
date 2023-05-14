@@ -4,70 +4,67 @@
 
 
 
-
     <div class="row w-full" style="width:100%;margin-top:20px">
         <form method="POST" action="{{ route('guardar-turno') }}">
             @csrf
-            <h2>Turno Completo </h2>
+            <h2>Seleccion de Servicios </h2>
+
+
+
+            <div class="row input-group mb-3">
+
+
+                <select class="col-12 form-select" id="selecciondeservicios" onChange="cambioElServicio(this)"
+                    name="selecciondeservicios">
+                    <option selected value="0">Selecionar</option>
+
+                    @foreach ($servicios as $servicio)
+                        <option value="{{ $servicio->id }}">{{ $servicio->titulo }}</option>
+                    @endforeach
+                </select>
+                <div class="col-12 row " id="divServicios">
+                </div>
+
+            </div>
+
+
             <p>horario: </p>
+
             <input class="form-control" type="number" name="Horariocompleto">
+
             <p>fecha: </p>
 
             <input class="form-control" type="date" name="Fechaturno">
+
             <button id="321" type="submit" class="btn btn-primary" style="background-color:aquamarine">Seleccionar
                 Completo</button>
         </form>
     </div>
 
 
-
-    <div class="row w-full" style="width:100%;margin-top:20px">
-        <h2>Turno Simple </h2>
-        <button id="123" type="submit" class="btn btn-primary">Seleccionar Simple</button>
-
-
-    </div>
-
-
-
-    {{-- <form method="POST" action="{{ route("guardar-telfono-usuario-post")}}" >
-    @csrf
-    <h2 style="width: 25%;margin: 20px;background-color: white;">Actualizar telefono - {{ Auth::user()->name }}</h2>
-    <input class="form-control" type="text" name="telefono">
-    <input class="form-control" type="text" >
-    <button id="lala" type="submit"
-     class="btn btn-primary">Guardar telefono</button>
-
-
-     <h4>{{$data["something"]}} </h4>
-</form> --}}
-@stop
+@endsection
 
 
 @section('js')
     <script type="text/javascript">
-        // alert(123);
-        console.log(231);
-        // alert(123);
-        let element = document.getElementById("lala");
-        // element.onclick = function (ev){
-        //     console.log("clickme")
-        // }
-        let obje = {
-            name: "nehuen"
-        }
-        // alert(JSON.stringify(obje));
-        function testing(event) {
-            console.log("clickme2", event)
-        }
+        let servicios = JSON.parse('{!! $servicios !!}'); // pasamos la info de laravel a un objeto en javascript .
+        console.log(servicios);
 
-        // $("#lala").onClick(function(ev){
-        //     console.log(ev);
-        // })
-        // element.onClick(function(){
-        //     console.log(123123)
-        // })
-        // let element2 = $("#lala");
-        // console.log(element2);
+        let div = document.getElementById("divServicios"); // ?
+
+        function cambioElServicio(element) {
+            console.log(element.value);
+
+            if (element.value != 0) {
+                let servicio = servicios.find(x => x.id == element.value);
+                {{-- `  ` --}}
+                div.innerHTML = "<span class='col-12' >titulo " + servicio.titulo +
+                    "</span> <span class='col-12'>descripcion: " + servicio.descripcion + "</span>";
+            } else {
+                div.innerHTML = "";
+            }
+
+            console.log(div);
+        }
     </script>
 @stop

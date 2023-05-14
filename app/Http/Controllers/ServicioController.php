@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Servicio;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -84,4 +85,19 @@ class ServicioController extends Controller
         // }
         return redirect()->route("admin-servicios");
     }
+
+    public function mostrarhistorialservicio ()
+    {
+        $turnos = DB::table('turnos')
+            ->join('servicios', 'turnos.servicio_id', '=', 'servicios.id')
+            ->join('users', 'turnos.user_id','=','users.id')
+            ->select('turnos.*', 'servicios.titulo', 'users.name', 'servicios.costo')
+            ->get();
+
+            // dd($turnos);
+
+            return view('admin.historialdeservicios')->with('turnos',$turnos);
+    }
+
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servicio;
 use App\Models\Turno;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,16 +14,17 @@ class TestController extends Controller
 {
     public function test(Request $request)
     {
-        $data = [
-            "something" => "show me the money",
-            "algo" => "tete"
-        ];
+
         // dd($request->all());
+        $servicios = Servicio::get();
 
         // dd(Auth::user(),User::find(1));
         // dd($data);
-        return view("test")->with("data", $data);
+        // dd(json_encode($servicios));
+        return view("test")->with("servicios", $servicios);
     }
+
+
 
     public function savephone(Request $re)
     {
@@ -42,14 +44,19 @@ class TestController extends Controller
     {
         $turnoocupado = Turno::where("dia", $re->Fechaturno)->where("horario", '<', $re->Horariocompleto + 2)->where("horario", '>', $re->Horariocompleto - 2)->first();
 
-
         $horaactual = Carbon::now();
         $fechaturno = Carbon::parse($re->Fechaturno);
 
         //    dd($horaactual, $fechaturno);
         $id = Auth::user()->id;  //guarda el id de user en id
-        // dd($re->all(),$id);
+        // dd($re->all(),$re->selecciondeservicios,$re->selecciondeservicios== "0");
         try {
+
+            if($re->selecciondeservicios == "0" ) {     //verifico que haya seleccionado un servicio
+                Session::put("err", "Debe seleccionar un servicio");
+                return redirect()->route("test");
+            }
+
             if ($re->Horariocompleto > 24 || $re->Horariocompleto < 0) {     //verifico que la hora sea en un formato valido
                 Session::put("err", "Horario invalido");
                 return redirect()->route("test");
@@ -70,7 +77,9 @@ class TestController extends Controller
                 "dia" => $re->Fechaturno,
                 "user_id" => $id,
                 "comentario" => "",
-                "estado" => "inicial"
+                "estado" => "inicial",
+                "servicio_id"=>$re->selecciondeservicios
+
             ]);
             Session::put("msj", "Se ha guardado correctamente su turno");
         } catch (\Throwable $th) {
@@ -111,4 +120,5 @@ class TestController extends Controller
 
         //
     }
+
 }

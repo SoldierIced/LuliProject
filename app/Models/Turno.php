@@ -15,6 +15,7 @@ class Turno extends Model
         'user_id',
         'estado',
         'comentario',
+        'servicio_id',
     ];
     public $timestamps = false;
 

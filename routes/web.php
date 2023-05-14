@@ -51,3 +51,6 @@ Route::get('/admin/servicios', [ServicioController::class, 'agregarnuevoservicio
 Route::post('/admin/servicios/guardar', [ServicioController::class, 'guardar'])->name('admin-servicios-guardar');
 Route::post('/admin/servicios/eliminar', [ServicioController::class, 'eliminar'])->name('admin-servicios-eliminar');
 Route::post('/admin/servicios/modificar', [ServicioController::class, 'modificar'])->name('admin-servicios-modificar');
+
+Route::get('/admin/servicios/historial', [ServicioController::class, 'mostrarhistorialservicio'])->name('admin-servicios-historial');
+

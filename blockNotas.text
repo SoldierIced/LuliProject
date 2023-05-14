@@ -8,7 +8,7 @@ php artisan make:model "Nombre de la migracion" --mc   //crea el modelo, la migr
 
 
 
-php artisan migrate:refresh resetea las tablas y las crea devuelta
+php artisan migrate:refresh    resetea las tablas y las crea devuelta
 
  dd() es un console log que termina la ejecucion
 
@@ -50,3 +50,10 @@ que las fecha a cargar en nuevo turno que sea a partir de la fecha de hoy en ade
 que no haya ya un turno existente en ese horario
 que haya un break de 30 minutos entre turno y turno
 
+listar todos los servicios disponibles, lo tengo que poder seleccionar, poner la fecha y el horario que quiero, y eso guardarlo en la base de datos
+
+TODO
+
+historial de servicios/ que tipo de masajes / ganancia por servicio
+cuanto vendio / cuanto facturo
+cuanta ganancia tuvo

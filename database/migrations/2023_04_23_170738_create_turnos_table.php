@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string("horario");
             $table->string("dia");
             $table->string('user_id');
-            
+            $table ->string('servicio_id');
+
         });
     }
 

@@ -23,10 +23,9 @@
                         Administador
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('turno') }}">Turnos</a>
+                        <a class="dropdown-item" href="{{ route('admin-turnos') }}">Turnos</a>
                         <a class="dropdown-item" href="{{ route('admin-servicios') }}">Servicios</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Historial de Servicios</a>
                     </div>
                 </li>
             @endif
