@@ -23,39 +23,8 @@
 </head>
 
 <body class="">
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Pagina de laravel -</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('test') }}" role="button">Home</a>
-            @guest
-                @if (Route::has('login'))
-                    <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
-                @endif
+   @include("layouts.navbar")
 
-                @if (Route::has('register'))
-                    <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
-                @endif
-            @else
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                </form>
-            @endguest
-            <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('test') }}" role="button">Nuevo
-                turno</a>
-
-            @if (Auth::user() != null && Auth::user()->paid != null)
-                <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('admin-turnos') }}"
-                    role="button">admin</a>
-            @endif
-            <a class="p-2 text-dark btn btn-outline-primary" href="{{ route('mostrarturno') }}" role="button">mis
-                turnos</a>
-        </nav>
-    </div>
     <main role="main">
 
         <section class="jumbotron text-center">

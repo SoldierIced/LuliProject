@@ -35,7 +35,7 @@ class TestController extends Controller
         Session::put("msj", "Se ha guardado correctamente su telefono");
         // dd($re->all(),$user->telefono);
 
-        return redirect()->route("test");
+        return redirect()->route("home");
     }
     public function saveturno(Request $re)
     {
@@ -58,35 +58,8 @@ class TestController extends Controller
 
 
         // dd($re->all());
-        return redirect()->route("test");
+        return redirect()->route("home");
     }
 
-    public function mostrarturno()
-    {
-        //necesitamos traer la informacion de los turnos
-        //obtener el id del usuario
-        if (Auth::user() == null) {
-            Session::put("err", "Para poder entrar aca , tiene que estar logueado en su cuenta.");
 
-            return redirect()->route("home");
-        }
-        $id = Auth::user()->id;
-        //buscar en el modelo los turnos por id del usuario
-        $turnos = Turno::where("user_id", $id)
-            // ->where("id",1)
-            ->get();
-
-        // dd();
-
-        $turnos = Auth::user()->turnos; // traigo los turnos del modelo segun la relacion declara en User::turnos
-
-        // //mostras los turnos guardados en pantalla
-        // for ($i = 0; $i < $turnos->count(); $i++) {
-        //     // var_dump($turnos[$i]->id);
-        // }
-        // dd($turnos);
-        return view("misturnos")->with("turnos", $turnos);
-
-        //
-    }
 }

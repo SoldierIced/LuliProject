@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\AdminTurnoController;
+use App\Http\Controllers\ServiciosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TurnoController;
+use App\Http\Middleware\Authenticate;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,31 +21,41 @@ use App\Http\Controllers\TurnoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route("home");
 });
+
+Route::any('/logout', function () {
+    Auth::logout();
+    return redirect()->route("home");
+});
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
-
-Route::get('/test', [TestController::class, 'test'])->name('test'); //pag principal
-
-
-
-Route::get('/turno', [TestController::class, 'turno'])->name('turno'); //futura pagina de confirmacion de turno
-
-
-
-Route::post('/save-turno', [TestController::class, 'saveturno'])->name ('guardar-turno');
-//accion de guardar el turno
-
 //ruta para mostrar los turnos
-Route::get('/mostrarturno', [TestController::class, 'mostrarturno'])->name('mostrarturno');
+Route::prefix('turnos')->group(function () { // rutas del admin
+    Route::get('/', [TurnoController::class, 'turnosView'])->name('turnos');
+    Route::get('/nuevo', [TurnoController::class, 'turnosNewView'])->name('turnos-new-view');
+    Route::post('/update', [TurnoController::class, 'turnoSave'])->name('guardar-turno');
+})->middleware(Authenticate::class);
+
+
+
+Route::prefix('admin')->group(function () { // rutas del admin
+
+    Route::prefix('turnos')->group(function () { //rutas de los admin -> turnos
+        Route::get('/', [AdminTurnoController::class, 'turnosView'])->name('admin-turnos');
+        Route::post('update', [AdminTurnoController::class, 'turnosUpdate'])->name('admin-turnos-guardar');
+    });
+    Route::prefix('servicios')->group(function () { //rutas de los admin -> turnos
+        Route::get('/', [ServiciosController::class, 'view'])->name('servicios-view');
+
+
+    });
+
+
+})->middleware(Authenticate::class);
 
 //ruta pal admin
-Route::get('/admin/turnos', [TurnoController::class, 'tablaestado'])->name('admin-turnos');
-
-Route::post('/admin/turnos/guardar', [TurnoController::class, 'guardarestado'])->name('admin-turnos-guardar');
